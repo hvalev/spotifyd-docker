@@ -1,4 +1,3 @@
-
 #An extra layer to get around this bug https://github.com/docker/buildx/issues/395
 #It's there simply to download add required libraries for cargo build
 FROM --platform=$BUILDPLATFORM rust:1.49-buster AS rust_fix
@@ -19,12 +18,12 @@ RUN mkdir -p .cargo \
 FROM rust:1.49-buster as build
 
 RUN apt-get -y update && \
-    apt-get install --no-install-recommends -y libasound2-dev build-essential pulseaudio libpulse-dev libdbus-1-dev
+    apt-get install --no-install-recommends -y libasound2-dev libdbus-1-dev
 
 COPY --from=rust_fix /usr/src/spotifyd /usr/src/spotifyd
 WORKDIR /usr/src/spotifyd
 
-RUN cargo build --release --features pulseaudio_backend,dbus_mpris --offline
+RUN cargo build --release --features dbus_mpris --offline
 
 FROM debian:buster-slim as release
 

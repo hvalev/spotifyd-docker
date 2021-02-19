@@ -1,4 +1,3 @@
-
 #An extra layer to get around this bug https://github.com/docker/buildx/issues/395
 #It's there simply to download add required libraries for cargo build
 FROM --platform=$BUILDPLATFORM rust:1.49-buster AS rust_fix
