@@ -1,11 +1,6 @@
 name: ci
 
-on:
-  push:
-    tags:
-      - 'v*'
-    paths-ignore:
-    - 'README.md'
+on: push
 
 jobs:
   buildx:

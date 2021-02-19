@@ -3,7 +3,7 @@ on: workflow_dispatch
 #  schedule:
 #    - cron:  '0 * */1 * *'
 jobs:
-  updateSwagger:
+  updateSpotifyD:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
