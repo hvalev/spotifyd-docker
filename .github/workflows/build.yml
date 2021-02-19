@@ -70,4 +70,4 @@ jobs:
         env:
            DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUBUNAME }}
            DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUBPWD }}
-           DOCKERHUB_REPOSITORY: spotifyd-${{ matrix.profile }}
+           DOCKERHUB_REPOSITORY: hvalev/spotifyd-${{ matrix.profile }}
