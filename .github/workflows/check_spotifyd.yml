@@ -1,7 +1,7 @@
 name: Check SpotifyD Version
 on: workflow_dispatch
 #  schedule:
-#    - cron:  '0 * */1 * *'
+#    - cron:  '0 0 */1 * *'
 jobs:
   updateSpotifyD:
     runs-on: ubuntu-20.04

@@ -4,12 +4,12 @@
 FROM --platform=$BUILDPLATFORM rust:1.49-buster AS rust_fix
 
 ENV USER=root
-ENV V_spotifyd=0.2.25-1
+ENV V_spotifyd=v0.2.25-1
 
 WORKDIR /usr/src/spotifyd
 RUN apt-get -y update && \
     apt-get install --no-install-recommends -y apt-transport-https ca-certificates git && \
-    git clone --branch=${V_spotifyd} https://github.com/Spotifyd/spotifyd.git . 
+    git clone --depth 1 --branch=${V_spotifyd} https://github.com/Spotifyd/spotifyd.git . 
 
 # Don't do `cargo init` or --> error: `cargo init` cannot be run on existing Cargo packages
 # RUN cargo init
