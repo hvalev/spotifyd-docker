@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix: 
-        profile: [alsa, alsa-dbus, pulseaudio, pulseaudio-dbus]
+        profile: [alsa, alsa-dbus, pulseaudio,pulseaudio-dbus]
     steps:
       -
         name: Checkout
