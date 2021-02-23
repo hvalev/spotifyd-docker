@@ -1,5 +1,5 @@
 # Spotify Daemon in Docker
-[![build](https://github.com/hvalev/spotifyd-docker/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/hvalev/spotifyd-docker/actions/workflows/build.yml)
+[![build](https://github.com/hvalev/spotifyd-docker/actions/workflows/build.yml/badge.svg)](https://github.com/hvalev/spotifyd-docker/actions/workflows/build.yml)
 ![spotifyd%20version](https://img.shields.io/badge/spotifyd%20version-0.3.0-green)
 
 Repository building spotifyd for docker for ARM (armv7/arm64) and AMD (x32/x64) architectures. This workflow builds the mixture of feature configurations consisting of alsa/pulseaudio audio-backend and with/without D-Bus API for controlling spotifyd through generic media players.
