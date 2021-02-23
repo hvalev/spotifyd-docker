@@ -33,9 +33,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /tmp/.buildx-cache-${{ matrix.profile }}
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          key: ${{ runner.os }}-${{ github.sha }}-${{ matrix.profile }}-buildx-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-buildx-
+            ${{ runner.os }}-${{ github.sha }}-${{ matrix.profile }}-buildx-
       -
         name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
