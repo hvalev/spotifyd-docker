@@ -30,6 +30,8 @@ services:
       - "${AUDIO_GRP}"
 ```
 
+If you're running this on a raspberry-pi, you can replace ${AUDIO_GRP} with 29.
+
 ## How to run the pulseaudio variant
 TBD
 
