@@ -8,7 +8,7 @@
 
 Spotifyd within a docker container for ARM (armv7/arm64) and AMD (x32/x64) architectures in configuration variants alsa/pulseaudio for audio-backend and with/without D-Bus API for controlling spotifyd through generic media players.
 
-## Disclaimer and insights
+## Insights
 According to my subjective experience and available hardware, dbus in the alsa variant is better as it uses a software controller which appears to increase volume linearly. On the other hand the volume control with pure alsa renders anything below 60% practically unhearable and anything above 80% too loud. I haven't tested the pulseaudio version yet. Let me know if you have some feedback.
 
 ## How to run the alsa variant
