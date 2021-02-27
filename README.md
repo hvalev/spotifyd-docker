@@ -30,7 +30,7 @@ services:
       - "${AUDIO_GRP}"
 ```
 
-If you're running this on a raspberry-pi, you can replace ${AUDIO_GRP} with 29.
+If you're running this on a raspberry-pi, you can replace ${AUDIO_GRP} with 29 as that is the id of the audiogroup user. If not, simply type ```id``` in the terminal and enter whatever number shows next to (audio).
 
 ## How to run the pulseaudio variant
 TBD
