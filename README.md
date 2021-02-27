@@ -18,8 +18,8 @@ or with docker-compose:
 version: '3'
 services:
   spotifyd:
-    image: "hvalev/spotifyd-XXX"
-    network_mode: "host"
+    image: hvalev/spotifyd-XXX
+    network_mode: host
     devices:
       - /dev/snd:/dev/snd
     volumes:
@@ -27,7 +27,7 @@ services:
       - /etc/spotifyd/spotifyd.conf:/etc/spotifyd.conf
       - /etc/asound.conf:/etc/asound.conf
     group_add:
-      - "${AUDIO_GRP}"
+      - ${AUDIO_GRP}
 ```
 
 If you're running this on a raspberry-pi, you can replace ${AUDIO_GRP} with 29 as that is the id of the audiogroup user. If not, simply type ```id``` in the terminal and enter whatever number shows next to (audio).
