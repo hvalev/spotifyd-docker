@@ -1,6 +1,6 @@
 #An extra layer to get around this bug https://github.com/docker/buildx/issues/395
 #It's there simply to download add required libraries for cargo build
-FROM --platform=$BUILDPLATFORM rust:1.52.1-buster AS rust_fix
+FROM --platform=$BUILDPLATFORM rust:1.53.0-buster AS rust_fix
 
 ENV USER=root
 ENV V_spotifyd=v0.3.2
@@ -15,7 +15,7 @@ RUN apt-get -y update && \
 RUN mkdir -p .cargo \
   && cargo vendor > .cargo/config
 
-FROM rust:1.52.1-buster as build
+FROM rust:1.53.0-buster as build
 
 RUN apt-get -y update && \
     apt-get install --no-install-recommends -y libasound2-dev build-essential libdbus-1-dev
