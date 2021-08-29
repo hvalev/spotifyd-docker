@@ -2,36 +2,31 @@ name: Check SpotifyD Version
 
 on: 
   schedule:
-    - cron: '0 4 * * 5'
+    - cron: '0 4 * * 6'
 
 jobs:
   updateSpotifyD:
     runs-on: ubuntu-20.04
     steps:
-      - 
-        uses: actions/checkout@v2
-      - 
-        name: Get Latest SpotifyD Release
+      - uses: actions/checkout@v2
+      - name: Get Latest SpotifyD Release
         id: spotifyd-version
         run: |
           echo ::set-output name=release_tag::$(curl -sL https://api.github.com/repos/Spotifyd/spotifyd/releases/latest | jq -r ".tag_name" | cut -b 2-)
           echo ::set-output name=current_tag::$(<spotifyd-version.txt)
-      - 
-        name: Update SpotifyD
+      - name: Update SpotifyD
         if: steps.spotifyd-version.outputs.current_tag != steps.spotifyd-version.outputs.release_tag
         env:
           RELEASE_TAG: ${{ steps.spotifyd-version.outputs.release_tag }}
         run: |
           # Update current release
           echo ${{ steps.spotifyd-version.outputs.release_tag }} > spotifyd-version.txt
-      - 
-        name: Update Readme.md & Dockerfile
+      - name: Update Readme.md & Dockerfile
         uses: jacobtomlinson/gha-find-replace@master
         with:
           find: ${{ steps.spotifyd-version.outputs.current_tag }}
           replace: ${{ steps.spotifyd-version.outputs.release_tag }}
-      - 
-        name: Create Pull Request
+      - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           commit-message: Update spotifyd-version to ${{ steps.spotifyd-version.outputs.release_tag }}

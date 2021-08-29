@@ -1,9 +1,10 @@
 name: ci
-
 on:
   push:
     paths-ignore:
-    - 'README.md'
+      - 'README.md'
+    branches:
+      - '**'
 
 jobs:
   buildx:

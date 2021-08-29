@@ -1,11 +1,10 @@
 name: build
-
 on:
   push:
-    tags:
-      - 'v*'
     paths-ignore:
-    - 'README.md'
+      - 'README.md'
+    tags:
+      - '**'
 
 jobs:
   buildx:

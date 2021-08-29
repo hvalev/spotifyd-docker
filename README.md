@@ -45,4 +45,4 @@ At the moment the rust-fix intermediary build image exists as a workaround to th
 Spotifyd requires a Spotify Premium account.
 
 ## Acknowledgements
-Naturally, all credit goes to [spotifyd](https://github.com/Spotifyd/spotifyd). The instructions, dockerfile and explanation at [GnaphronG/docker-spotifyd](https://github.com/GnaphronG/docker-spotifyd) consititute a major portion of the contents in this repository.
+Naturally, all credit goes to [spotifyd](https://github.com/Spotifyd/spotifyd). The instructions, dockerfile and explanation at [GnaphronG/docker-spotifyd](https://github.com/GnaphronG/docker-spotifyd) constitute a major portion of the contents in this repository.
