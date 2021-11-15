@@ -23,7 +23,7 @@ RUN apt-get -y update && \
 COPY --from=rust_fix /usr/src/spotifyd /usr/src/spotifyd
 WORKDIR /usr/src/spotifyd
 
-RUN cargo build --release --offline
+RUN cargo build -j 4 --release --offline
 
 FROM debian:buster-slim as release
 
