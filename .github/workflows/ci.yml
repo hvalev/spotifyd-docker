@@ -1,11 +1,10 @@
 name: ci
 on:
-  workflow_dispatch:
-#  push:
-#    paths-ignore:
-#      - 'README.md'
-#    branches:
-#      - '**'
+  push:
+    paths-ignore:
+      - 'README.md'
+    branches:
+      - '**'
 
 jobs:
   buildx:
