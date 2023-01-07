@@ -15,33 +15,26 @@ jobs:
     #concurrency: 
     #  group: ${{ github.workflow }}
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v3
-      - 
-        name: Get Version
+      - name: Get Version
         id: get_version
         uses: battila7/get-version-action@v2.3.0
-      -
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v2
-      -
-        name: Cache Docker layers
+      - name: Cache Docker layers
         uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache-${{ matrix.profile }}
           key: ${{ runner.os }}-${{ github.sha }}-${{ matrix.profile }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-${{ github.sha }}-${{ matrix.profile }}-buildx-
-      -
-        name: Available platforms
+      - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
-      -
-        name: Build only
+      - name: Build only
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -50,8 +43,7 @@ jobs:
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
           cache-from: type=local,src=/tmp/.buildx-cache-${{ matrix.profile }}
           cache-to: type=local,dest=/tmp/.buildx-cache-new-${{ matrix.profile }}
-      - 
-        name: Move cache
+      - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache-${{ matrix.profile }}
           mv /tmp/.buildx-cache-new-${{ matrix.profile }} /tmp/.buildx-cache-${{ matrix.profile }}
