@@ -18,6 +18,8 @@ or with docker-compose:
 version: '3'
 services:
   spotifyd:
+    container_name: spotify
+    restart: always
     image: hvalev/spotifyd-XXX
     network_mode: host
     devices:
@@ -33,7 +35,26 @@ services:
 If you're running this on a raspberry-pi, you can replace ${AUDIO_GRP} with 29 as that is the id of the audiogroup user. If not, simply type ```id``` in the terminal and enter whatever number shows next to (audio).
 
 ## How to run the pulseaudio variant
-TBD
+```
+version: "3.5"
+services:
+  spotify:
+    container_name: spotify
+    restart: always
+    image: hvalev/spotifyd-pulseaudio
+    user: ${PUID}:${PGID}
+    #network_mode: host #disabling to only show logged in user in spotify app (if you run multiple containers at once with different user logins)
+    devices:
+      - /dev/snd:/dev/snd
+    group_add:
+      - ${AUDIO_GRP}
+    environment: 
+      - PULSE_SERVER=unix:/tmp/pulseaudio.socket
+      - PULSE_COOKIE=/tmp/pulseaudio.cookie
+    volumes:
+      - /run/user/1000/pulse/native:/tmp/pulseaudio.socket
+      - ${USERDIR}/docker/spotifyd/spotifyd.conf:/etc/spotifyd.conf
+```
 
 ## How to build it
 Grab the dockerfile with the configuration you wish to build and remove ```--platform=$BUILDPLATFORM``` from the first image.
