@@ -4,7 +4,7 @@
 | ![Alsa Docker Pulls](https://img.shields.io/docker/pulls/hvalev/spotifyd-alsa) ![Alsa Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/hvalev/spotifyd-alsa) | ![Alsa Docker Pulls](https://img.shields.io/docker/pulls/hvalev/spotifyd-alsa-dbus) ![Alsa Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/hvalev/spotifyd-alsa-dbus) | ![Alsa Docker Pulls](https://img.shields.io/docker/pulls/hvalev/spotifyd-pulseaudio) ![Alsa Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/hvalev/spotifyd-pulseaudio) | ![Alsa Docker Pulls](https://img.shields.io/docker/pulls/hvalev/spotifyd-pulseaudio-dbus) ![Alsa Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/hvalev/spotifyd-pulseaudio-dbus) |
 ----------------------------------
 [![build](https://github.com/hvalev/spotifyd-docker/actions/workflows/build.yml/badge.svg)](https://github.com/hvalev/spotifyd-docker/actions/workflows/build.yml)
-![spotifyd%20version](https://img.shields.io/badge/spotifyd%20version-0.3.4-green)
+![spotifyd%20version](https://img.shields.io/badge/spotifyd%20version-0.3.5-green)
 
 Spotifyd within a docker container for ARM (armv7/arm64) and x32/x64 architectures in configuration variants alsa/pulseaudio for audio-backend and with/without D-Bus API for controlling spotifyd through generic media players.
 
