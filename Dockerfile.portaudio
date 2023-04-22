@@ -3,7 +3,7 @@
 FROM --platform=$BUILDPLATFORM rust:1.68.2-buster AS rust_fix
 
 ENV USER=root
-ENV V_spotifyd=v0.3.4
+ENV V_spotifyd=v0.3.5
 
 WORKDIR /usr/src/spotifyd
 RUN apt-get -y update && \
