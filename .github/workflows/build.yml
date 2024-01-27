@@ -55,7 +55,7 @@ jobs:
           rm -rf /tmp/.buildx-cache-${{ matrix.profile }}
           mv /tmp/.buildx-cache-new-${{ matrix.profile }} /tmp/.buildx-cache-${{ matrix.profile }}
       - name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v3
+        uses: peter-evans/dockerhub-description@v4
         env:
            DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUBUNAME }}
            DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUBPWD }}
