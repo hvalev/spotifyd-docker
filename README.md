@@ -12,10 +12,12 @@ Spotifyd within a docker container for ARM (armv7/arm64) and x32/x64 architectur
 According to my subjective experience and available hardware, dbus in the alsa variant is better as it uses a software controller which appears to increase volume linearly. On the other hand the volume control with pure alsa renders anything below 60% practically unhearable and anything above 80% too loud. I haven't tested the pulseaudio version yet. Let me know if you have some feedback.
 
 ## How to run the alsa variant
-```docker run -d --net host --group-add $(getent group audio | cut -d: -f3) --device /dev/snd:/dev/snd -v /usr/share/alsa:/usr/share/alsa -v $PWD/contrib/spotifyd.conf:/etc/spotifyd.conf hvalev/spotifyd-XXX``` where you need to replace ```XXX``` with the appropriate image in ```https://hub.docker.com/u/hvalev```.
-or with docker-compose:
+```bash
+docker run -d --net host --group-add $(getent group audio | cut -d: -f3) --device /dev/snd:/dev/snd -v /usr/share/alsa:/usr/share/alsa -v $PWD/contrib/spotifyd.conf:/etc/spotifyd.conf hvalev/spotifyd-XXX
 ```
-version: '3'
+where you need to replace ```XXX``` with the appropriate image tag in ```https://hub.docker.com/u/hvalev```.
+or with docker-compose:
+```yaml
 services:
   spotifyd:
     container_name: spotify
@@ -35,8 +37,7 @@ services:
 If you're running this on a raspberry-pi, you can replace ${AUDIO_GRP} with 29 as that is the id of the audiogroup user. If not, simply type ```id``` in the terminal and enter whatever number shows next to (audio).
 
 ## How to run the pulseaudio variant
-```
-version: "3.5"
+```yaml
 services:
   spotify:
     container_name: spotify
