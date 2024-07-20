@@ -18,7 +18,7 @@ jobs:
 
       - name: Get Version
         id: get_version
-        uses: battila7/get-version-action@v2.3.0
+        uses: dhkatz/get-version-action@v3.0.0
 
       - name: Read Spotifyd Version
         id: read_version

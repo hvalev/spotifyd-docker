@@ -3,14 +3,13 @@
 FROM --platform=$BUILDPLATFORM rust:1.75.0-buster AS rust_fix
 
 # standard version
-ARG VERSION=v0.3.5
+ARG VERSION=v0.3.4
 ENV USER=root
 ENV V_SPOTIFYD=${VERSION}
 
 WORKDIR /usr/src/spotifyd
 RUN apt-get -y update && \
     apt-get install --no-install-recommends -y apt-transport-https ca-certificates git && \
-    git clone --depth 1 --branch=${V_SPOTIFYD} https://github.com/Spotifyd/spotifyd.git . || \
     git clone --depth 1 https://github.com/Spotifyd/spotifyd.git . && \
     git checkout ${V_SPOTIFYD}
 
