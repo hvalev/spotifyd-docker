@@ -24,7 +24,10 @@ jobs:
 
       - name: Read Spotifyd Version
         id: read_version
-        run: echo "VERSION=$(cat spotifyd-hash.txt)" >> $GITHUB_ENV
+        run: |
+          VERSION=$(cat spotifyd-hash.txt)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Spotifyd Version: $VERSION"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
