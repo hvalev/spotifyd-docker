@@ -58,7 +58,7 @@ services:
 ```
 
 ## How to build it
-Grab the dockerfile with the configuration you wish to build and remove ```--platform=$BUILDPLATFORM``` from the first image.
+Grab the dockerfile with the configuration you wish to build and remove ```--platform=$BUILDPLATFORM``` from the first image. Since a single Dockerfile is used for all images, you also need to add `--target alsa-dbus-release` or another flavor to build along with your build command.
 
 ## Information
 At the moment the rust-fix intermediary build image exists as a workaround to this [bug](https://github.com/docker/buildx/issues/395).
