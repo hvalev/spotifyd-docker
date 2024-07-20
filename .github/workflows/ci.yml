@@ -3,6 +3,7 @@ on:
   push:
     paths-ignore:
       - 'README.md'
+      - 'spotifyd-hash.txt'
     branches:
       - '**'
 
