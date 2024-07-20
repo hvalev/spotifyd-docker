@@ -46,5 +46,5 @@ jobs:
             [1]: https://github.com/Spotifyd/spotifyd
             [2]: https://github.com/peter-evans/create-pull-request
           labels: dependencies, automated pr
-          branch: spotifyd-updates
+          branch: spotifyd-update-nightly
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
