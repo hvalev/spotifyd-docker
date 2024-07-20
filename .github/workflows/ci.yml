@@ -9,42 +9,93 @@ on:
 jobs:
   buildx:
     runs-on: ubuntu-latest
-    strategy:
-      matrix: 
-        profile: [alsa, alsa-dbus, pulseaudio, pulseaudio-dbus]
-    #concurrency: 
-    #  group: ${{ github.workflow }}
+    # strategy:
+    #   matrix: 
+    #     profile: [alsa, alsa-dbus, pulseaudio, pulseaudio-dbus]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Get Version
         id: get_version
         uses: battila7/get-version-action@v2.3.0
+
+      - name: Read Spotifyd Version
+        id: read_version
+        run: echo "VERSION=$(cat spotifyd-version.txt)" >> $GITHUB_ENV
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
+
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v3
-      - name: Cache Docker layers
-        uses: actions/cache@v4
-        with:
-          path: /tmp/.buildx-cache-${{ matrix.profile }}
-          key: ${{ runner.os }}-${{ github.sha }}-${{ matrix.profile }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-${{ github.sha }}-${{ matrix.profile }}-buildx-
+
+      # - name: Cache Docker layers
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: /tmp/.buildx-cache
+      #     key: ${{ runner.os }}-${{ github.sha }}-${{ matrix.profile }}-buildx
+      #     restore-keys: |
+      #       ${{ runner.os }}-${{ github.sha }}-${{ matrix.profile }}-buildx
+      #       ${{ runner.os }}-${{ github.sha }}-buildx
+      #       ${{ runner.os }}-buildx
+
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
-      - name: Build only
-        uses: docker/build-push-action@v5
+
+      - name: Build alsa
+        uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./Dockerfile.${{ matrix.profile }}
-          builder: ${{ steps.buildx.outputs.name }}
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
-          cache-from: type=local,src=/tmp/.buildx-cache-${{ matrix.profile }}
-          cache-to: type=local,dest=/tmp/.buildx-cache-new-${{ matrix.profile }}
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache-${{ matrix.profile }}
-          mv /tmp/.buildx-cache-new-${{ matrix.profile }} /tmp/.buildx-cache-${{ matrix.profile }}
-      
+          target: alsa-release
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            VERSION=${{ env.VERSION }}
+
+      - name: Build alsa-dbus
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
+          target: alsa-dbus-release
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            VERSION=${{ env.VERSION }}
+
+      - name: Build pulseaudio
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
+          target: pulseaudio-release
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            VERSION=${{ env.VERSION }}
+
+      - name: Build pulseaudio-dbus
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
+          target: pulseaudio-dbus-release
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            VERSION=${{ env.VERSION }}
+
+      # - name: Build only
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: .
+      #     file: ./Dockerfile.${{ matrix.profile }}
+      #     builder: ${{ steps.buildx.outputs.name }}
+      #     platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
+      #     cache-from: type=local,src=/tmp/.buildx-cache
+      #     cache-to: type=local,dest=/tmp/.buildx-cache
+      #     build-args: |
+      #       VERSION=${{ env.VERSION }}
