@@ -9,13 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Install libs
         run: sudo apt-get update && sudo apt-get install curl jq -y
+      
       - name: Get Latest SpotifyD Release
         id: spotifyd-version
         run: |
-          echo "release_tag=$(curl -sL https://api.github.com/repos/Spotifyd/spotifyd/releases/latest | jq -r ".tag_name" | cut -b 2-)" >> $GITHUB_OUTPUT
+          echo "release_tag=$(curl -sL https://api.github.com/repos/Spotifyd/spotifyd/releases/latest | jq -r ".tag_name" | cut -b 1-)" >> $GITHUB_OUTPUT
           echo "current_tag=$(<spotifyd-version.txt)" >> $GITHUB_OUTPUT
+      
       - name: Update SpotifyD
         if: steps.spotifyd-version.outputs.current_tag != steps.spotifyd-version.outputs.release_tag
         env:
@@ -23,11 +26,13 @@ jobs:
         run: |
           # Update current release
           echo ${{ steps.spotifyd-version.outputs.release_tag }} > spotifyd-version.txt
+      
       - name: Update Readme.md & Dockerfile
-        uses: jacobtomlinson/gha-find-replace@master
+        uses: jacobtomlinson/gha-find-replace@v3.0.2
         with:
           find: ${{ steps.spotifyd-version.outputs.current_tag }}
           replace: ${{ steps.spotifyd-version.outputs.release_tag }}
+      
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
