@@ -3,7 +3,7 @@
 FROM --platform=$BUILDPLATFORM rust:1.75.0-buster AS rust_fix
 
 # standard version
-ARG VERSION=v0.3.4
+ARG VERSION=v0.3.5
 ENV USER=root
 ENV V_SPOTIFYD=${VERSION}
 
@@ -11,7 +11,7 @@ WORKDIR /usr/src/spotifyd
 RUN apt-get -y update && \
     apt-get install --no-install-recommends -y apt-transport-https ca-certificates git && \
     git clone --depth 1 https://github.com/Spotifyd/spotifyd.git . && \
-    git checkout ${V_SPOTIFYD}
+    git checkout -b ${V_SPOTIFYD}
 
 # Don't do `cargo init` or --> error: `cargo init` cannot be run on existing Cargo packages
 # RUN cargo init
