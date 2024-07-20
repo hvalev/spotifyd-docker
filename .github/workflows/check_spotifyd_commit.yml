@@ -1,6 +1,7 @@
 name: Check SpotifyD Version
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 4 * * 6'
 
