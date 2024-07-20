@@ -1,11 +1,11 @@
-name: build
+# No need for a nightly ci as if it fails it fails
+name: nightly
 on:
   push:
-    paths-ignore:
-      - 'README.md'
+    branches:
+      - main
+    paths:
       - 'spotifyd-hash.txt'
-    tags:
-      - '**'
 
 jobs:
   buildx:
@@ -23,7 +23,7 @@ jobs:
 
       - name: Read Spotifyd Version
         id: read_version
-        run: echo "VERSION=$(cat spotifyd-version.txt)" >> $GITHUB_ENV
+        run: echo "VERSION=$(cat spotifyd-hash.txt)" >> $GITHUB_ENV
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -97,8 +97,8 @@ jobs:
             VERSION=${{ env.VERSION }}
           push: true
           tags: |
-            hvalev/spotifyd-alsa:${{ steps.get_version.outputs.version-without-v }}
-            hvalev/spotifyd-alsa:latest
+            hvalev/spotifyd-alsa:${{ env.VERSION }}
+            hvalev/spotifyd-alsa:nightly
 
       - name: Push alsa-dbus
         uses: docker/build-push-action@v6
@@ -112,8 +112,8 @@ jobs:
             VERSION=${{ env.VERSION }}
           push: true
           tags: |
-            hvalev/spotifyd-alsa-dbus:${{ steps.get_version.outputs.version-without-v }}
-            hvalev/spotifyd-alsa-dbus:latest
+            hvalev/spotifyd-alsa-dbus:${{ env.VERSION }}
+            hvalev/spotifyd-alsa-dbus:nightly
 
       - name: Push pulseaudio
         uses: docker/build-push-action@v6
@@ -127,8 +127,8 @@ jobs:
             VERSION=${{ env.VERSION }}
           push: true
           tags: |
-            hvalev/spotifyd-pulseaudio:${{ steps.get_version.outputs.version-without-v }}
-            hvalev/spotifyd-pulseaudio:latest
+            hvalev/spotifyd-pulseaudio:${{ env.VERSION }}
+            hvalev/spotifyd-pulseaudio:nightly
 
       - name: Push pulseaudio-dbus
         uses: docker/build-push-action@v6
@@ -142,8 +142,8 @@ jobs:
             VERSION=${{ env.VERSION }}
           push: true
           tags: |
-            hvalev/spotifyd-pulseaudio-dbus:${{ steps.get_version.outputs.version-without-v }}
-            hvalev/spotifyd-pulseaudio-dbus:latest
+            hvalev/spotifyd-pulseaudio-dbus:${{ env.VERSION }}
+            hvalev/spotifyd-pulseaudio-dbus:nightly
 
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
