@@ -1,3 +1,5 @@
+# paths-ignore are not respected on PRs. For now this will run along with the nightly
+# https://github.com/actions/runner/issues/2324
 name: ci
 on:
   push:
