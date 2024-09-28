@@ -31,7 +31,7 @@ jobs:
           echo ${{ steps.spotifyd-hash.outputs.latest_commit_hash }} > spotifyd-hash.txt
       
       - name: Update Readme.md & Dockerfile
-        uses: jacobtomlinson/gha-find-replace@3.0.3
+        uses: jacobtomlinson/gha-find-replace@3.0.4
         with:
           find: ${{ steps.spotifyd-hash.outputs.current_commit_hash }}
           replace: ${{ steps.spotifyd-hash.outputs.latest_commit_hash }}
