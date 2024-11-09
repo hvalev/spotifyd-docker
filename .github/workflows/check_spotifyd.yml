@@ -28,7 +28,7 @@ jobs:
           echo ${{ steps.spotifyd-version.outputs.release_tag }} > spotifyd-version.txt
       
       - name: Update Readme.md & Dockerfile
-        uses: jacobtomlinson/gha-find-replace@3.0.4
+        uses: jacobtomlinson/gha-find-replace@3.0.5
         with:
           find: ${{ steps.spotifyd-version.outputs.current_tag }}
           replace: ${{ steps.spotifyd-version.outputs.release_tag }}
