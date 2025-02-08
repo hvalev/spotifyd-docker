@@ -71,7 +71,7 @@ RUN cargo build -j 2 --release --features pulseaudio_backend,dbus_mpris --offlin
 ###
 # Release image for alsa
 ###
-FROM debian:bookworm-20241223-slim AS alsa-release
+FROM debian:bookworm-20250203-slim AS alsa-release
 RUN apt-get update && \
     apt-get install -yqq --no-install-recommends libasound2 && \
     rm -rf /var/lib/apt/lists/* && \
@@ -84,7 +84,7 @@ USER spotify
 ###
 # Release image for alsa-dbus
 ###
-FROM debian:bookworm-20241223-slim AS alsa-dbus-release
+FROM debian:bookworm-20250203-slim AS alsa-dbus-release
 RUN apt-get update && \
     apt-get install -yqq --no-install-recommends libasound2 dbus libssl3 && \
     rm -rf /var/lib/apt/lists/* && \
@@ -97,7 +97,7 @@ USER spotify
 ###
 # Release image for pulseaudio
 ###
-FROM debian:bookworm-20241223-slim AS pulseaudio-release
+FROM debian:bookworm-20250203-slim AS pulseaudio-release
 RUN apt-get update && \
     apt-get install -yqq --no-install-recommends libasound2 pulseaudio && \
     rm -rf /var/lib/apt/lists/* && \
@@ -110,7 +110,7 @@ USER spotify
 ###
 # Release image for pulseaudio-dbus
 ###
-FROM debian:bookworm-20241223-slim AS pulseaudio-dbus-release
+FROM debian:bookworm-20250203-slim AS pulseaudio-dbus-release
 RUN apt-get update && \
     apt-get install -yqq --no-install-recommends libasound2 pulseaudio dbus libssl3 && \
     rm -rf /var/lib/apt/lists/* && \
@@ -123,7 +123,7 @@ USER spotify
 ###
 # Release image for portaudio
 ###
-FROM debian:bookworm-20241223-slim AS portaudio-release
+FROM debian:bookworm-20250203-slim AS portaudio-release
 RUN apt-get update && \
     apt-get install -yqq --no-install-recommends libasound2 && \
     rm -rf /var/lib/apt/lists/* && \
@@ -136,7 +136,7 @@ USER spotify
 ###
 # Release image for portaudio-dbus
 ###
-FROM debian:bookworm-20241223-slim AS portaudio-dbus-release
+FROM debian:bookworm-20250203-slim AS portaudio-dbus-release
 RUN apt-get update && \
     apt-get install -yqq --no-install-recommends libasound2 libdbus-1-3 libssl3 && \
     rm -rf /var/lib/apt/lists/* && \
