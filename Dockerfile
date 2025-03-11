@@ -23,7 +23,7 @@ RUN mkdir -p .cargo \
 ###
 FROM rust:1.85.0-bookworm AS alsa-build
 RUN apt-get -y update && \
-    apt-get install --no-install-recommends -y libasound2-dev
+    apt-get install --no-install-recommends -y libasound2-dev cmake
 COPY --from=rust_fix /usr/src/spotifyd /usr/src/spotifyd
 WORKDIR /usr/src/spotifyd
 RUN cargo build -j 2 --release --offline
