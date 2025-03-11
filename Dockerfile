@@ -3,7 +3,7 @@
 FROM --platform=$BUILDPLATFORM rust:1.85.0-bookworm AS rust_fix
 
 # standard version
-ARG VERSION=v0.3.5
+ARG VERSION=v0.4.0
 ENV USER=root
 ENV V_SPOTIFYD=${VERSION}
 
@@ -57,7 +57,7 @@ RUN cargo build -j 2 --release --features pulseaudio_backend,dbus_mpris --offlin
 ###
 FROM alsa-build AS portaudio-build
 RUN apt-get -y update && \
-    apt-get install --no-install-recommends -y libasound2-dev build-essential
+    apt-get install --no-install-recommends -y libasound2-dev build-essential pulseaudio libpulse-dev
 RUN cargo build -j 2 --release --features pulseaudio_backend --offline
 
 ###
@@ -65,7 +65,7 @@ RUN cargo build -j 2 --release --features pulseaudio_backend --offline
 ###
 FROM portaudio-build AS portaudio-dbus-build
 RUN apt-get -y update && \
-    apt-get install --no-install-recommends -y libasound2-dev build-essential libdbus-1-dev
+    apt-get install --no-install-recommends -y libasound2-dev build-essential pulseaudio libpulse-dev libdbus-1-dev
 RUN cargo build -j 2 --release --features pulseaudio_backend,dbus_mpris --offline
 
 ###
