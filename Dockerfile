@@ -3,7 +3,7 @@
 FROM --platform=$BUILDPLATFORM rust:1.85.0-bookworm AS rust_fix
 
 # standard version
-ARG VERSION=v0.4.0
+ARG VERSION=v0.4.1
 ENV USER=root
 ENV V_SPOTIFYD=${VERSION}
 
