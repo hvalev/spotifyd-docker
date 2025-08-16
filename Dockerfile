@@ -86,7 +86,7 @@ USER spotify
 ###
 FROM debian:trixie-20250811-slim AS alsa-dbus-release
 RUN apt-get update && \
-    apt-get install -yqq --no-install-recommends ca-certificates libasound2t64 dbus libssl3 && \
+    apt-get install -yqq --no-install-recommends ca-certificates libasound2t64 dbus libssl3t64 && \
     rm -rf /var/lib/apt/lists/* && \
     groupadd -r spotify && \
     useradd --no-log-init -r -g spotify -G audio spotify
@@ -112,7 +112,7 @@ USER spotify
 ###
 FROM debian:trixie-20250811-slim AS pulseaudio-dbus-release
 RUN apt-get update && \
-    apt-get install -yqq --no-install-recommends ca-certificates libasound2t64 pulseaudio dbus libssl3 && \
+    apt-get install -yqq --no-install-recommends ca-certificates libasound2t64 pulseaudio dbus libssl3t64 && \
     rm -rf /var/lib/apt/lists/* && \
     groupadd -r spotify && \
     useradd --no-log-init -r -g spotify -G audio spotify
@@ -138,7 +138,7 @@ USER spotify
 ###
 FROM debian:trixie-20250811-slim AS portaudio-dbus-release
 RUN apt-get update && \
-    apt-get install -yqq --no-install-recommends ca-certificates libasound2t64 libdbus-1-3 libssl3 && \
+    apt-get install -yqq --no-install-recommends ca-certificates libasound2t64 libdbus-1-3 libssl3t64 && \
     rm -rf /var/lib/apt/lists/* && \
     groupadd -r spotify && \
     useradd --no-log-init -r -g spotify -G audio spotify
