@@ -71,7 +71,7 @@ RUN cargo build -j 2 --release --features pulseaudio_backend,dbus_mpris --offlin
 ###
 # Release image for alsa
 ###
-FROM debian:trixie-20250811-slim AS alsa-release
+FROM debian:trixie-20250908-slim AS alsa-release
 RUN apt-get update && \
     apt-get install -yqq --no-install-recommends ca-certificates libasound2t64 && \
     rm -rf /var/lib/apt/lists/* && \
@@ -84,7 +84,7 @@ USER spotify
 ###
 # Release image for alsa-dbus
 ###
-FROM debian:trixie-20250811-slim AS alsa-dbus-release
+FROM debian:trixie-20250908-slim AS alsa-dbus-release
 RUN apt-get update && \
     apt-get install -yqq --no-install-recommends ca-certificates libasound2t64 dbus libssl3t64 && \
     rm -rf /var/lib/apt/lists/* && \
@@ -97,7 +97,7 @@ USER spotify
 ###
 # Release image for pulseaudio
 ###
-FROM debian:trixie-20250811-slim AS pulseaudio-release
+FROM debian:trixie-20250908-slim AS pulseaudio-release
 RUN apt-get update && \
     apt-get install -yqq --no-install-recommends ca-certificates libasound2t64 pulseaudio && \
     rm -rf /var/lib/apt/lists/* && \
@@ -110,7 +110,7 @@ USER spotify
 ###
 # Release image for pulseaudio-dbus
 ###
-FROM debian:trixie-20250811-slim AS pulseaudio-dbus-release
+FROM debian:trixie-20250908-slim AS pulseaudio-dbus-release
 RUN apt-get update && \
     apt-get install -yqq --no-install-recommends ca-certificates libasound2t64 pulseaudio dbus libssl3t64 && \
     rm -rf /var/lib/apt/lists/* && \
@@ -123,7 +123,7 @@ USER spotify
 ###
 # Release image for portaudio
 ###
-FROM debian:trixie-20250811-slim AS portaudio-release
+FROM debian:trixie-20250908-slim AS portaudio-release
 RUN apt-get update && \
     apt-get install -yqq --no-install-recommends ca-certificates libasound2t64 && \
     rm -rf /var/lib/apt/lists/* && \
@@ -136,7 +136,7 @@ USER spotify
 ###
 # Release image for portaudio-dbus
 ###
-FROM debian:trixie-20250811-slim AS portaudio-dbus-release
+FROM debian:trixie-20250908-slim AS portaudio-dbus-release
 RUN apt-get update && \
     apt-get install -yqq --no-install-recommends ca-certificates libasound2t64 libdbus-1-3 libssl3t64 && \
     rm -rf /var/lib/apt/lists/* && \
