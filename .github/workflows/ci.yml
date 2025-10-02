@@ -11,7 +11,9 @@ on:
 
 jobs:
   buildx:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+    timeout-minutes: 4320
+    # runs-on: ubuntu-latest
     steps:
       - name: Free Disk Space
         uses: ShubhamTatvamasi/free-disk-space-action@master
@@ -46,8 +48,10 @@ jobs:
           context: .
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
           target: alsa-release
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=local,src=/tmp/runner/docker-cache
+          cache-to: type=local,dest=/tmp/runner/docker-cache,mode=max
+          # cache-from: type=gha
+          # cache-to: type=gha,mode=max
           build-args: |
             VERSION=${{ env.VERSION }}
 
@@ -57,8 +61,10 @@ jobs:
           context: .
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
           target: alsa-dbus-release
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=local,src=/tmp/runner/docker-cache
+          cache-to: type=local,dest=/tmp/runner/docker-cache,mode=max
+          # cache-from: type=gha
+          # cache-to: type=gha,mode=max
           build-args: |
             VERSION=${{ env.VERSION }}
 
@@ -68,8 +74,10 @@ jobs:
           context: .
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
           target: pulseaudio-release
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=local,src=/tmp/runner/docker-cache
+          cache-to: type=local,dest=/tmp/runner/docker-cache,mode=max
+          # cache-from: type=gha
+          # cache-to: type=gha,mode=max
           build-args: |
             VERSION=${{ env.VERSION }}
 
@@ -79,7 +87,9 @@ jobs:
           context: .
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
           target: pulseaudio-dbus-release
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=local,src=/tmp/runner/docker-cache
+          cache-to: type=local,dest=/tmp/runner/docker-cache,mode=max
+          # cache-from: type=gha
+          # cache-to: type=gha,mode=max
           build-args: |
             VERSION=${{ env.VERSION }}
