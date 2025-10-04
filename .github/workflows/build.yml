@@ -105,28 +105,28 @@ jobs:
             hvalev/spotifyd-pulseaudio-dbus:latest
 
       - name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v4
+        uses: peter-evans/dockerhub-description@v5
         with:
           username: ${{ secrets.DOCKERHUBUNAME }}
           password: ${{ secrets.DOCKERHUBPWD }}
           repository: hvalev/spotifyd-alsa
 
       - name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v4
+        uses: peter-evans/dockerhub-description@v5
         with:
           username: ${{ secrets.DOCKERHUBUNAME }}
           password: ${{ secrets.DOCKERHUBPWD }}
           repository: hvalev/spotifyd-alsa-dbus
 
       - name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v4
+        uses: peter-evans/dockerhub-description@v5
         with:
           username: ${{ secrets.DOCKERHUBUNAME }}
           password: ${{ secrets.DOCKERHUBPWD }}
           repository: hvalev/spotifyd-pulseaudio
       
       - name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v4
+        uses: peter-evans/dockerhub-description@v5
         with:
           username: ${{ secrets.DOCKERHUBUNAME }}
           password: ${{ secrets.DOCKERHUBPWD }}
