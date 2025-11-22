@@ -3,7 +3,7 @@
 FROM --platform=$BUILDPLATFORM rust:1.91.0-trixie AS rust_fix
 
 # standard version
-ARG VERSION=v0.4.1
+ARG VERSION=v0.4.2
 ENV USER=root
 ENV V_SPOTIFYD=${VERSION}
 
