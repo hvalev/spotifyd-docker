@@ -21,11 +21,14 @@ RUN mkdir -p .cargo \
 ###
 # Base build image building the barebones spotifyd client which is alsa
 ###
-FROM rust:1.91.1-trixie AS alsa-build
+FROM rust:1.91.1-trixie AS alsa-build 
 RUN apt-get -y update && \
-    apt-get install --no-install-recommends -y libasound2-dev cmake libclang-dev clang
-COPY --from=rust_fix /usr/src/spotifyd /usr/src/spotifyd
-WORKDIR /usr/src/spotifyd
+    apt-get install --no-install-recommends -y \
+    libasound2-dev cmake libclang-dev clang libdbus-1-dev pkg-config \
+    libpulse-dev libssl-dev build-essential && \
+    rm -rf /var/lib/apt/lists/* 
+COPY --from=rust_fix /usr/src/spotifyd /usr/src/spotifyd 
+WORKDIR /usr/src/spotifyd 
 RUN cargo build -j 2 --release --offline
 
 ###
