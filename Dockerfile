@@ -29,7 +29,7 @@ RUN apt-get -y update && \
     rm -rf /var/lib/apt/lists/* 
 COPY --from=rust_fix /usr/src/spotifyd /usr/src/spotifyd 
 WORKDIR /usr/src/spotifyd 
-RUN cargo build -j 2 --release --offline
+RUN cargo build -j 4 --release --offline
 
 ###
 # Build image for alsa-dbus
@@ -37,7 +37,7 @@ RUN cargo build -j 2 --release --offline
 FROM alsa-build AS alsa-dbus-build
 RUN apt-get -y update && \
     apt-get install --no-install-recommends -y libasound2-dev libdbus-1-dev
-RUN cargo build -j 2 --release --features dbus_mpris --offline
+RUN cargo build -j 4 --release --features dbus_mpris --offline
 
 ###
 # Build image for pulseaudio
@@ -45,7 +45,7 @@ RUN cargo build -j 2 --release --features dbus_mpris --offline
 FROM alsa-build AS pulseaudio-build
 RUN apt-get -y update && \
     apt-get install --no-install-recommends -y libasound2-dev build-essential pulseaudio libpulse-dev
-RUN cargo build -j 2 --release --features pulseaudio_backend --offline
+RUN cargo build -j 4 --release --features pulseaudio_backend --offline
 
 ###
 # Build image for pulseaudio-dbus
@@ -53,7 +53,7 @@ RUN cargo build -j 2 --release --features pulseaudio_backend --offline
 FROM pulseaudio-build AS pulseaudio-dbus-build
 RUN apt-get -y update && \
     apt-get install --no-install-recommends -y libasound2-dev build-essential pulseaudio libpulse-dev libdbus-1-dev
-RUN cargo build -j 2 --release --features pulseaudio_backend,dbus_mpris --offline
+RUN cargo build -j 4 --release --features pulseaudio_backend,dbus_mpris --offline
 
 ###
 # Build image for portaudio
@@ -61,7 +61,7 @@ RUN cargo build -j 2 --release --features pulseaudio_backend,dbus_mpris --offlin
 FROM alsa-build AS portaudio-build
 RUN apt-get -y update && \
     apt-get install --no-install-recommends -y libasound2-dev build-essential pulseaudio libpulse-dev
-RUN cargo build -j 2 --release --features pulseaudio_backend --offline
+RUN cargo build -j 4 --release --features pulseaudio_backend --offline
 
 ###
 # Build image for portaudio-dbus
@@ -69,7 +69,7 @@ RUN cargo build -j 2 --release --features pulseaudio_backend --offline
 FROM portaudio-build AS portaudio-dbus-build
 RUN apt-get -y update && \
     apt-get install --no-install-recommends -y libasound2-dev build-essential pulseaudio libpulse-dev libdbus-1-dev
-RUN cargo build -j 2 --release --features pulseaudio_backend,dbus_mpris --offline
+RUN cargo build -j 4 --release --features pulseaudio_backend,dbus_mpris --offline
 
 ###
 # Release image for alsa
