@@ -6,7 +6,7 @@
 [![build](https://github.com/hvalev/spotifyd-docker/actions/workflows/build.yml/badge.svg)](https://github.com/hvalev/spotifyd-docker/actions/workflows/build.yml)
 ![spotifyd%20version](https://img.shields.io/badge/spotifyd%20version-0.4.0-green)
 
-Spotifyd within a docker container for ARM and x86 architectures. Comes in flavors `alsa`/`pulseaudio` for audio-backend and with/without dbus support. There is a sample `spotifyd.conf` config catering to the `alsa-dbus` variant in the repository which you can use to bootstrap your container. This config is valid for version `0.4.0`, but may change depending on development at `spotifyd` and `librespot`.
+Spotifyd within a docker container for ARM and x86 architectures. Comes in flavors `alsa`/`pulseaudio` for audio-backend and with/without dbus support. There is a sample `spotifyd.conf` config catering to the `alsa-dbus` variant in the repository which you can use to bootstrap your container. With zeroconf you should not need to provide a config file. For posterity a `spotifyd.conf` is provided in the repo.
 
 NOTE: only the alsa-dbus variant has been tested, if you have a working `pulseaudio` setup, feel free to contribute a working config or a working docker-compose definition.
 
@@ -21,8 +21,6 @@ services:
     # Keep in mind to keep the ports for zeroconf and mdns open on the host
     devices:
       - /dev/snd:/dev/snd
-    volumes:
-      - {YOUR_CONFIG_PATH}/spotifyd.conf:/etc/spotifyd.conf
 ```
 
 ## How to run the pulseaudio variant
@@ -41,7 +39,6 @@ services:
       - PULSE_COOKIE=/tmp/pulseaudio.cookie
     volumes:
       - /run/user/1000/pulse/native:/tmp/pulseaudio.socket
-      - {YOUR_CONFIG_PATH}/spotifyd.conf:/etc/spotifyd.conf
 ```
 
 ## Insights
