@@ -1,6 +1,6 @@
 # An extra layer to get around this bug https://github.com/docker/buildx/issues/395
 # It's there simply to download and add required libraries for cargo build
-FROM --platform=$BUILDPLATFORM rust:1.93.0-trixie AS rust_fix
+FROM --platform=$BUILDPLATFORM rust:1.93.1-trixie AS rust_fix
 
 # standard version
 ARG VERSION=v0.4.2
@@ -21,7 +21,7 @@ RUN mkdir -p .cargo \
 ###
 # Base build image building the barebones spotifyd client which is alsa
 ###
-FROM rust:1.93.0-trixie AS alsa-build 
+FROM rust:1.93.1-trixie AS alsa-build 
 RUN apt-get -y update && \
     apt-get install --no-install-recommends -y \
     libasound2-dev cmake libclang-dev clang libdbus-1-dev pkg-config \
