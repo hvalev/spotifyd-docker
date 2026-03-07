@@ -47,7 +47,7 @@ jobs:
           password: ${{ secrets.DOCKERHUBTOKEN }}
 
       - name: Push alsa
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
@@ -64,7 +64,7 @@ jobs:
             hvalev/spotifyd-alsa:latest
 
       - name: Push alsa-dbus
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
@@ -81,7 +81,7 @@ jobs:
             hvalev/spotifyd-alsa-dbus:latest
 
       - name: Push pulseaudio
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
@@ -98,7 +98,7 @@ jobs:
             hvalev/spotifyd-pulseaudio:latest
 
       - name: Push pulseaudio-dbus
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
