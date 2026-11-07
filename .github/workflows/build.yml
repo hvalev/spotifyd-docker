@@ -12,15 +12,6 @@ jobs:
     runs-on: self-hosted
     timeout-minutes: 4320
     steps:
-      - name: Mask Cache Registry Secrets
-        run: |
-          echo "::add-mask::$CACHE_REGISTRY_URL"
-          echo "::add-mask::$CACHE_REGISTRY_USERNAME"
-          echo "::add-mask::$CACHE_REGISTRY_PASSWORD"
-          echo "CACHE_REGISTRY_URL=$CACHE_REGISTRY_URL" >> $GITHUB_ENV
-          echo "CACHE_REGISTRY_USERNAME=$CACHE_REGISTRY_USERNAME" >> $GITHUB_ENV
-          echo "CACHE_REGISTRY_PASSWORD=$CACHE_REGISTRY_PASSWORD" >> $GITHUB_ENV
-
       - name: Free Disk Space
         uses: ShubhamTatvamasi/free-disk-space-action@master
       
@@ -44,20 +35,9 @@ jobs:
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v4
-        with:
-          buildkitd-config-inline: |
-            [registry."${{ env.CACHE_REGISTRY_URL }}"]
-              http = true
 
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
-
-      - name: Login to Cache Registry
-        uses: docker/login-action@v4
-        with:
-          registry: ${{ env.CACHE_REGISTRY_URL }}
-          username: ${{ env.CACHE_REGISTRY_USERNAME }}
-          password: ${{ env.CACHE_REGISTRY_PASSWORD }}
 
       - name: Login to Docker Hub
         uses: docker/login-action@v4
@@ -71,8 +51,8 @@ jobs:
           context: .
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
           target: alsa-release
-          cache-from: type=registry,ref=${{ env.CACHE_REGISTRY_URL }}/spotifyd-cache:buildcache
-          cache-to: type=registry,ref=${{ env.CACHE_REGISTRY_URL }}/spotifyd-cache:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           build-args: |
             VERSION=${{ env.VERSION }}
           push: true
@@ -86,8 +66,8 @@ jobs:
           context: .
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
           target: alsa-dbus-release
-          cache-from: type=registry,ref=${{ env.CACHE_REGISTRY_URL }}/spotifyd-cache:buildcache
-          cache-to: type=registry,ref=${{ env.CACHE_REGISTRY_URL }}/spotifyd-cache:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           build-args: |
             VERSION=${{ env.VERSION }}
           push: true
@@ -101,8 +81,8 @@ jobs:
           context: .
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
           target: pulseaudio-release
-          cache-from: type=registry,ref=${{ env.CACHE_REGISTRY_URL }}/spotifyd-cache:buildcache
-          cache-to: type=registry,ref=${{ env.CACHE_REGISTRY_URL }}/spotifyd-cache:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           build-args: |
             VERSION=${{ env.VERSION }}
           push: true
@@ -116,8 +96,8 @@ jobs:
           context: .
           platforms: linux/arm/v7,linux/arm64,linux/386,linux/amd64
           target: pulseaudio-dbus-release
-          cache-from: type=registry,ref=${{ env.CACHE_REGISTRY_URL }}/spotifyd-cache:buildcache
-          cache-to: type=registry,ref=${{ env.CACHE_REGISTRY_URL }}/spotifyd-cache:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           build-args: |
             VERSION=${{ env.VERSION }}
           push: true
